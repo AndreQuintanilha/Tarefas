@@ -37,13 +37,13 @@ export default function App() {
   const hasAccess = permissions[user.role].includes(active);
 
   const contentMap = {
-    Dashboard: <Dashboard user={user} />,
-    Tarefas: <Tarefas setActive={setActive} />,
-    Funcionários: <Funcionarios setActive={setActive} />,
-    Relatório: <Relatorio />,
-    CadastroTarefas: <CadastroTarefas setActive={setActive} />,
-    CadastroFuncionarios: <CadastroFuncionarios setActive={setActive} />,
-  };
+  Dashboard: <Dashboard user={user} />,
+  Tarefas: <Tarefas user={user} setActive={setActive} />,
+  Funcionários: <Funcionarios user={user} setActive={setActive} />,
+  Relatório: <Relatorio />,
+  CadastroTarefas: <CadastroTarefas setActive={setActive} />,
+  CadastroFuncionarios: <CadastroFuncionarios setActive={setActive} />,
+};
 
   return (
     <div className={classes.layout}>
