@@ -8,13 +8,15 @@ import Dashboard from "./pages/Dashboard";
 import Funcionarios from "./pages/Funcionarios";
 import CadastroTarefas from "./pages/CadastroTarefas";
 import CadastroFuncionarios from "./pages/CadastroFuncionarios";
+import AlterarFuncionarios from "./pages/AlterarFuncionarios"; // plural
 import Relatorio from "./pages/Relatorio";
 import Tarefas from "./pages/Tarefas";
 
 export default function App() {
-  const [user, setUser] = useState(null); // 👈 usuário começa deslogado
+  const [user, setUser] = useState(null);
   const [active, setActive] = useState("Dashboard");
   const [open, setOpen] = useState(false);
+  const [selectedFuncionarioId, setSelectedFuncionarioId] = useState(null); // 👈 guarda ID
 
   // permissões
   const permissions = {
@@ -26,10 +28,10 @@ export default function App() {
       "Relatório",
       "CadastroTarefas",
       "CadastroFuncionarios",
+      "AlterarFuncionarios" // 👈 plural, igual ao nome da page
     ],
   };
 
-  // 🔐 SE NÃO ESTIVER LOGADO → MOSTRA LOGIN
   if (!user) {
     return <Login onLogin={setUser} />;
   }
@@ -37,13 +39,25 @@ export default function App() {
   const hasAccess = permissions[user.role].includes(active);
 
   const contentMap = {
-  Dashboard: <Dashboard user={user} />,
-  Tarefas: <Tarefas user={user} setActive={setActive} />,
-  Funcionários: <Funcionarios user={user} setActive={setActive} />,
-  Relatório: <Relatorio />,
-  CadastroTarefas: <CadastroTarefas setActive={setActive} />,
-  CadastroFuncionarios: <CadastroFuncionarios setActive={setActive} />,
-};
+    Dashboard: <Dashboard user={user} />,
+    Tarefas: <Tarefas user={user} setActive={setActive} />,
+    Funcionários: (
+      <Funcionarios
+        user={user}
+        setActive={setActive}
+        setSelectedFuncionarioId={setSelectedFuncionarioId} // 👈 passa setter
+      />
+    ),
+    Relatório: <Relatorio />,
+    CadastroTarefas: <CadastroTarefas setActive={setActive} />,
+    CadastroFuncionarios: <CadastroFuncionarios setActive={setActive} />,
+    AlterarFuncionarios: (
+      <AlterarFuncionarios
+        setActive={setActive}
+        funcionarioId={selectedFuncionarioId} // passa ID selecionado
+      />
+    ),
+  };
 
   return (
     <div className={classes.layout}>
