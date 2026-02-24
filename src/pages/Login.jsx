@@ -19,7 +19,8 @@ export default function Login({ onLogin }) {
         const perfil = result.split("Perfil: ")[1].trim();
 
         // Passa o usuário com o perfil correto para o App.jsx
-        onLogin({ nome: username, role: perfil });
+        onLogin({ username: username, role: perfil });
+
       } else {
         setError("Usuário ou senha inválidos");
       }

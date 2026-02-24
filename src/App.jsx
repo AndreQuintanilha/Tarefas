@@ -8,17 +8,19 @@ import Dashboard from "./pages/Dashboard";
 import Funcionarios from "./pages/Funcionarios";
 import CadastroTarefas from "./pages/CadastroTarefas";
 import CadastroFuncionarios from "./pages/CadastroFuncionarios";
-import AlterarFuncionarios from "./pages/AlterarFuncionarios"; // plural
+import AlterarFuncionarios from "./pages/AlterarFuncionarios";
 import Relatorio from "./pages/Relatorio";
 import Tarefas from "./pages/Tarefas";
+import AlterarTarefas from "./pages/AlterarTarefas"; // 👈 página de edição de tarefas
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [active, setActive] = useState("Dashboard");
   const [open, setOpen] = useState(false);
-  const [selectedFuncionarioId, setSelectedFuncionarioId] = useState(null); // 👈 guarda ID
+  const [selectedFuncionarioId, setSelectedFuncionarioId] = useState(null);
+  const [selectedTarefaId, setSelectedTarefaId] = useState(null);
 
-  // permissões
+  // permissões por perfil
   const permissions = {
     FUNCIONARIO: ["Dashboard", "Tarefas"],
     GESTOR: [
@@ -28,7 +30,8 @@ export default function App() {
       "Relatório",
       "CadastroTarefas",
       "CadastroFuncionarios",
-      "AlterarFuncionarios" // 👈 plural, igual ao nome da page
+      "AlterarFuncionarios",
+      "AlterarTarefas"
     ],
   };
 
@@ -40,21 +43,40 @@ export default function App() {
 
   const contentMap = {
     Dashboard: <Dashboard user={user} />,
-    Tarefas: <Tarefas user={user} setActive={setActive} />,
+    Tarefas: (
+  <Tarefas
+    usuarioLogado={{ username: user.username, perfil: user.role }}
+    setActive={setActive}
+    setSelectedTarefaId={setSelectedTarefaId}
+  />
+),
+
     Funcionários: (
       <Funcionarios
         user={user}
         setActive={setActive}
-        setSelectedFuncionarioId={setSelectedFuncionarioId} // 👈 passa setter
+        setSelectedFuncionarioId={setSelectedFuncionarioId}
       />
     ),
     Relatório: <Relatorio />,
-    CadastroTarefas: <CadastroTarefas setActive={setActive} />,
+    CadastroTarefas: (
+      <CadastroTarefas
+        setActive={setActive}
+        usuarioLogado={{ username: user.username, perfil: user.role }}
+      />
+    ),
     CadastroFuncionarios: <CadastroFuncionarios setActive={setActive} />,
     AlterarFuncionarios: (
       <AlterarFuncionarios
         setActive={setActive}
-        funcionarioId={selectedFuncionarioId} // passa ID selecionado
+        funcionarioId={selectedFuncionarioId}
+      />
+    ),
+    AlterarTarefas: (
+      <AlterarTarefas
+        setActive={setActive}
+        tarefaId={selectedTarefaId}
+        usuarioLogado={{ username: user.username, perfil: user.role }}
       />
     ),
   };

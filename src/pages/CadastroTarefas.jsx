@@ -1,38 +1,37 @@
 import { useState } from "react";
+import { registerTarefa } from "../services/CadastroTarefa.api"; // 👈 importa serviço
 import "../style/CadastroTarefas.css";
 
-export default function CadastroTarefas({ setActive }) {
+export default function CadastroTarefas({ setActive, usuarioLogado }) {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [prazo, setPrazo] = useState("");
-  const [prioridade, setPrioridade] = useState("");
-  const [responsavel, setResponsavel] = useState("");
+  const [status, setStatus] = useState("aberto");
+  const [responsavel, setResponsavel] = useState(usuarioLogado.username); // 👈 já pega do login
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const novaTarefa = {
       titulo,
       descricao,
-      prazo,
-      prioridade,
-      responsavel,
-      status: "Em andamento",
-      dataCriacao: new Date().toISOString(),
+      status,
+      usuario: { username: responsavel }, // 👈 formato correto
     };
 
-    console.log("Tarefa:", novaTarefa);
+    try {
+      await registerTarefa(novaTarefa);
+      alert("Tarefa cadastrada com sucesso!");
 
-    alert("Tarefa cadastrada com sucesso!");
+      // limpar campos
+      setTitulo("");
+      setDescricao("");
+      setStatus("aberto");
 
-    // limpar campos
-    setTitulo("");
-    setDescricao("");
-    setPrazo("");
-    setPrioridade("");
-    setResponsavel("");
-
-    setActive("Tarefas");
+      setActive("Tarefas"); // volta para lista
+    } catch (error) {
+      console.error("Erro ao cadastrar tarefa:", error);
+      alert("Erro ao cadastrar tarefa");
+    }
   };
 
   return (
@@ -60,38 +59,23 @@ export default function CadastroTarefas({ setActive }) {
         </label>
 
         <label>
-          Responsável:
+          Status:
+          <select value={status} onChange={(e) => setStatus(e.target.value)} required>
+            <option value="ABERTO">Aberto</option>
+            <option value="PENDENTE">Pendente</option>
+            <option value="EM_ANDAMENTO">Em andamento</option>
+            <option value="CONCLUIDo">Concluído</option>
+          </select>
+        </label>
+
+        <label>
+          Responsável (usuario):
           <input
             type="text"
-            placeholder="Nome do funcionário"
             value={responsavel}
             onChange={(e) => setResponsavel(e.target.value)}
             required
           />
-        </label>
-
-        <label>
-          Prazo:
-          <input
-            type="date"
-            value={prazo}
-            onChange={(e) => setPrazo(e.target.value)}
-            required
-          />
-        </label>
-
-        <label>
-          Prioridade:
-          <select
-            value={prioridade}
-            onChange={(e) => setPrioridade(e.target.value)}
-            required
-          >
-            <option value="">Selecione</option>
-            <option>Baixa</option>
-            <option>Média</option>
-            <option>Alta</option>
-          </select>
         </label>
 
         <button type="submit">Cadastrar Tarefa</button>
