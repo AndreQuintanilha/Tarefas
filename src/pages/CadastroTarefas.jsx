@@ -64,7 +64,7 @@ export default function CadastroTarefas({ setActive, usuarioLogado }) {
             <option value="ABERTO">Aberto</option>
             <option value="PENDENTE">Pendente</option>
             <option value="EM_ANDAMENTO">Em andamento</option>
-            <option value="CONCLUIDo">Concluído</option>
+            <option value="CONCLUIDO">Concluido</option>
           </select>
         </label>
 

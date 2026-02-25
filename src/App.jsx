@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavbarSimple } from "./components/NavBarSimple";
+import { NavbarSimple } from "./components/NavbarSimple";
 import Login from "./pages/Login";
 import classes from "./App.module.css";
 
@@ -9,9 +9,9 @@ import Funcionarios from "./pages/Funcionarios";
 import CadastroTarefas from "./pages/CadastroTarefas";
 import CadastroFuncionarios from "./pages/CadastroFuncionarios";
 import AlterarFuncionarios from "./pages/AlterarFuncionarios";
-import Relatorio from "./pages/Relatorio";
+import Relatorio from "./pages/Relatorio"; // 👈 agora está consistente
 import Tarefas from "./pages/Tarefas";
-import AlterarTarefas from "./pages/AlterarTarefas"; // 👈 página de edição de tarefas
+import AlterarTarefas from "./pages/AlterarTarefas";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -44,13 +44,12 @@ export default function App() {
   const contentMap = {
     Dashboard: <Dashboard user={user} />,
     Tarefas: (
-  <Tarefas
-    usuarioLogado={{ username: user.username, perfil: user.role }}
-    setActive={setActive}
-    setSelectedTarefaId={setSelectedTarefaId}
-  />
-),
-
+      <Tarefas
+        usuarioLogado={{ username: user.username, perfil: user.role }}
+        setActive={setActive}
+        setSelectedTarefaId={setSelectedTarefaId}
+      />
+    ),
     Funcionários: (
       <Funcionarios
         user={user}
@@ -58,7 +57,11 @@ export default function App() {
         setSelectedFuncionarioId={setSelectedFuncionarioId}
       />
     ),
-    Relatório: <Relatorio />,
+    Relatório: (
+      <Relatorio
+        usuarioLogado={{ username: user.username, perfil: user.role }}
+      />
+    ),
     CadastroTarefas: (
       <CadastroTarefas
         setActive={setActive}

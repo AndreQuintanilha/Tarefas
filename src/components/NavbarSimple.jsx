@@ -39,7 +39,7 @@ export function NavbarSimple({
         >
           <div className={classes.logoArea}>
             <IconDeviceDesktop size={28} stroke={1.5} />
-            <span className={classes.logoText}>Tech Titan System</span>
+            <span className={classes.logoText}>Tech Titans System</span>
           </div>
 
           <Code fw={700}>v1.0.0</Code>

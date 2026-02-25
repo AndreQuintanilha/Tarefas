@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getFuncionarios, deleteFuncionario } from "../services/funcionario.api";
+import "../style/Funcionarios.css";
 
 export default function Funcionarios({ setActive, setSelectedFuncionarioId }) {
   const [funcionarios, setFuncionarios] = useState([]);
@@ -25,63 +26,47 @@ export default function Funcionarios({ setActive, setSelectedFuncionarioId }) {
   };
 
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+    <div className="funcionarios-container">
+      <div className="funcionarios-header">
         <h1>Funcionários</h1>
-        <button
-          onClick={abrirCadastro}
-          style={{
-            padding: "10px 20px",
-            fontSize: "16px",
-            borderRadius: "5px",
-            backgroundColor: "#007BFF",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-          }}
-        >
-          Cadastrar Funcionário
-        </button>
+        <button onClick={abrirCadastro}>Cadastrar Funcionário</button>
       </div>
 
       <p>Lista de funcionários da empresa.</p>
 
-      <table border="1" cellPadding="10" style={{ marginTop: "20px", width: "100%" }}>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Usuário</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {funcionarios.map((f) => (
-            <tr key={f.id}>
-              <td>{f.nome}</td>
-              <td>{f.email}</td>
-              <td>{f.username}</td>
-              <td>
+      <div className="funcionarios-grid">
+        {funcionarios.length === 0 ? (
+          <p>Nenhum funcionário encontrado</p>
+        ) : (
+          funcionarios.map((f) => (
+            <div key={f.id} className="funcionario-card">
+              <div className="card-info">
+                <h3>{f.nome}</h3>
+                <p><strong>Email:</strong> {f.email}</p>
+                <p><strong>Usuário:</strong> {f.username}</p>
+                
+              </div>
+              <div className="card-actions">
                 <button
+                  className="edit-btn"
                   onClick={() => {
-                    setSelectedFuncionarioId(f.id); // guarda ID
-                    setActive("AlterarFuncionarios"); // abre página de alteração
+                    setSelectedFuncionarioId(f.id);
+                    setActive("AlterarFuncionarios");
                   }}
                 >
                   Editar
                 </button>
-
                 <button
+                  className="delete-btn"
                   onClick={() => handleDelete(f.id)}
-                  style={{ marginLeft: "10px", color: "red" }}
                 >
                   Apagar
                 </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

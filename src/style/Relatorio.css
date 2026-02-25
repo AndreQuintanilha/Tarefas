@@ -1,0 +1,146 @@
+.relatorio-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin-bottom: 1000px;
+}
+
+/* Título centralizado */
+.relatorio-container h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* Filtros no topo */
+.filtros {
+  position: sticky;   /* mantém no topo ao rolar */
+  top: 0;
+  background-color: #fff;
+  padding: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-end;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+.filtros label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  color: #444;
+}
+
+.filtros input,
+.filtros select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  min-width: 400px;
+}
+
+.btn-pesquisar {
+  padding: 10px 20px;
+  background-color: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-pesquisar:hover {
+  background-color: #005a9e;
+}
+
+/* Contagem */
+.contagem {
+  margin-top: 30px;
+}
+
+.contagem h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Lista de tarefas */
+.tarefas-lista {
+  margin-top: 30px;
+}
+
+.tarefas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tarefa-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.tarefa-card h3 {
+  margin-bottom: 10px;
+  color: #0078d7;
+}
+
+/* Cores por status */
+.tarefa-card.status-aberto {
+  background-color: #ffffff; /* branco */
+}
+
+.tarefa-card.status-pendente {
+  background-color: #fff3cd; /* amarelo claro */
+}
+
+.tarefa-card.status-em-andamento {
+  background-color: #cce5ff; /* azul claro */
+}
+
+.tarefa-card.status-concluido {
+  background-color: #d4edda; /* verde claro */
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .tarefas-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .tarefas-grid {
+    grid-template-columns: 1fr; /* 1 coluna em celular */
+  }
+}
+
+.tarefa-card h3 {
+  margin-bottom: 8px;
+  color: #2e0391;
+  font-size: 25px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filtros input,
+  .filtros select {
+    min-width: 100%;
+  }
+
+  .btn-pesquisar {
+    width: 100%;
+  }
+}

@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import { getTarefas, getTarefasPorUsuario, deleteTarefa, updateTarefa } from "../services/tarefa.api";
+import {
+  getTarefas,
+  getTarefasPorUsuario,
+  deleteTarefa,
+  updateTarefa,
+} from "../services/tarefa.api";
+import "../style/Tarefas.css";
 
-export default function Tarefas({ setActive, setSelectedTarefaId, usuarioLogado }) {
+export default function Tarefas({
+  setActive,
+  setSelectedTarefaId,
+  usuarioLogado,
+}) {
   const [tarefas, setTarefas] = useState([]);
 
   useEffect(() => {
@@ -14,15 +24,12 @@ export default function Tarefas({ setActive, setSelectedTarefaId, usuarioLogado 
       }
       setTarefas(data);
     };
-
     carregar();
   }, [usuarioLogado]);
 
   const handleDelete = async (id) => {
     if (window.confirm("Deseja realmente apagar esta tarefa?")) {
       await deleteTarefa(id);
-
-      // recarrega lista após deletar
       if (usuarioLogado.perfil === "GESTOR") {
         setTarefas(await getTarefas());
       } else {
@@ -36,10 +43,13 @@ export default function Tarefas({ setActive, setSelectedTarefaId, usuarioLogado 
     if (!tarefa) return;
 
     const tarefaAtualizada = { ...tarefa, status: novoStatus };
+    await updateTarefa(
+      id,
+      tarefaAtualizada,
+      usuarioLogado.username,
+      usuarioLogado.perfil
+    );
 
-    await updateTarefa(id, tarefaAtualizada, usuarioLogado.username, usuarioLogado.perfil);
-
-    // Atualiza lista local
     setTarefas((prev) =>
       prev.map((t) => (t.id === id ? { ...t, status: novoStatus } : t))
     );
@@ -49,94 +59,95 @@ export default function Tarefas({ setActive, setSelectedTarefaId, usuarioLogado 
     setActive("CadastroTarefas");
   };
 
+  // Mapeamento de status para classes CSS
+  const statusClassMap = {
+    ABERTO: "status-aberto",
+    PENDENTE: "status-pendente",
+    EM_ANDAMENTO: "status-em-andamento",
+    CONCLUIDO: "status-concluido",
+    CONCLUÍDO: "status-concluido", // caso venha com acento
+  };
+
   return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+    <div className="tarefas-container">
+      <div className="tarefas-header">
         <h1>Tarefas</h1>
         {usuarioLogado.perfil === "GESTOR" && (
-          <button
-            onClick={abrirCadastro}
-            style={{
-              padding: "10px 20px",
-              fontSize: "16px",
-              borderRadius: "5px",
-              backgroundColor: "#007BFF",
-              color: "#fff",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            Cadastrar Tarefas
-          </button>
+          <button onClick={abrirCadastro}>Cadastrar Tarefa</button>
         )}
       </div>
 
       <p>
         Lista de tarefas{" "}
-        {usuarioLogado.perfil === "GESTOR" ? "da empresa" : `do usuário ${usuarioLogado.username}`}
+        {usuarioLogado.perfil === "GESTOR"
+          ? "da empresa"
+          : `do usuário ${usuarioLogado.username}`}
       </p>
 
-      <table border="1" cellPadding="10" style={{ marginTop: "20px", width: "100%" }}>
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Descrição</th>
-            <th>Status</th>
-            <th>Responsável</th>
-            {usuarioLogado.perfil === "GESTOR" && <th>Ações</th>}
-          </tr>
-        </thead>
-        <tbody>
-          {tarefas.length === 0 ? (
-            <tr>
-              <td colSpan={usuarioLogado.perfil === "GESTOR" ? "5" : "4"}>
-                Nenhuma tarefa encontrada
-              </td>
-            </tr>
-          ) : (
-            tarefas.map((tarefa) => (
-              <tr key={tarefa.id}>
-                <td>{tarefa.titulo}</td>
-                <td>{tarefa.descricao}</td>
-                <td>
-                  {usuarioLogado.perfil === "FUNCIONARIO" ? (
+      <div className="tarefas-grid">
+        {tarefas.length === 0 ? (
+          <p>Nenhuma tarefa encontrada</p>
+        ) : (
+          tarefas.map((t) => (
+            <div
+              key={t.id}
+              className={`tarefa-card ${statusClassMap[t.status] || ""}`}
+            >
+              <div className="card-info">
+                <h3>{t.titulo}</h3>
+                <p>
+                  <strong>Descrição:</strong> {t.descricao}
+                </p>
+                <p>
+                  <strong>Status:</strong> {t.status}
+                </p>
+                <p>
+                  <strong>Responsável:</strong> {t.usuario?.username}
+                </p>
+              </div>
+
+              {usuarioLogado.perfil === "GESTOR" && (
+                <div className="card-actions">
+                  <button
+                    className="edit-btn"
+                    onClick={() => {
+                      setSelectedTarefaId(t.id);
+                      setActive("AlterarTarefas");
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(t.id)}
+                  >
+                    Apagar
+                  </button>
+                </div>
+              )}
+
+              {usuarioLogado.perfil === "FUNCIONARIO" && (
+                <div className="card-actions">
+                  <label className="status-label">
+                    Alterar Status:
                     <select
-                      value={tarefa.status}
-                      onChange={(e) => handleStatusChange(tarefa.id, e.target.value)}
+                      value={t.status}
+                      onChange={(e) =>
+                        handleStatusChange(t.id, e.target.value)
+                      }
                     >
                       <option value="ABERTO">Aberto</option>
                       <option value="PENDENTE">Pendente</option>
                       <option value="EM_ANDAMENTO">Em andamento</option>
                       <option value="CONCLUIDO">Concluído</option>
                     </select>
-                  ) : (
-                    tarefa.status
-                  )}
-                </td>
-                <td>{tarefa.usuario?.username}</td>
-                {usuarioLogado.perfil === "GESTOR" && (
-                  <td>
-                    <button
-                      onClick={() => {
-                        setSelectedTarefaId(tarefa.id);
-                        setActive("AlterarTarefas");
-                      }}
-                    >
-                      Editar
-                    </button>
-                    <button
-                      onClick={() => handleDelete(tarefa.id)}
-                      style={{ marginLeft: "10px", color: "red" }}
-                    >
-                      Apagar
-                    </button>
-                  </td>
-                )}
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+                  </label>
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,83 @@
+.alterar-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 700px; /* mais largo */
+  margin: 40px auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 20px 40px;
+}
+
+.alterar-container h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #2c3e50;
+  text-align: center; /* título centralizado */
+  padding: 10px;
+}
+
+.alterar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.alterar-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  color: #333;
+}
+
+.alterar-form input,
+.alterar-form select,
+.alterar-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+}
+
+/* Textarea maior */
+.alterar-form textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+/* Botões centralizados */
+.form-actions {
+  display: flex;
+  justify-content: center; /* centraliza os botões */
+  gap: 20px; /* separação entre eles */
+  margin-top: 25px;
+}
+
+.form-actions button {
+  padding: 12px 22px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.form-actions button[type="button"] {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.form-actions button[type="button"]:hover {
+  background-color: #5a6268;
+}
