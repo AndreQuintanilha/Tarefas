@@ -53,7 +53,7 @@ body {
 .tarefa-card {
   background: #fff;
   border-radius: 12px;
-  padding: 30px 40px;
+  padding: 50px 70px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   width: 100%;
   max-width: 350px; /* largura máxima de cada card */
@@ -113,19 +113,19 @@ body {
 
 /* Status específicos para cor do card */
 .tarefa-card.status-aberto {
-  background-color: #ffffff; /* branco */
+  background-color: #ffffff; 
 }
 
 .tarefa-card.status-pendente {
-  background-color: yellow; /* amarelo claro */
+  background-color: yellow; 
 }
 
 .tarefa-card.status-em-andamento {
-  background-color: #84baf3; /* azul claro */
+  background-color: #84baf3; 
 }
 
 .tarefa-card.status-concluido {
-  background-color: #4af171; /* verde claro */
+  background-color: #4af171; 
 }
 
 /* Responsivo */

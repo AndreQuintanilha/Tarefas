@@ -65,7 +65,7 @@ export default function Tarefas({
     PENDENTE: "status-pendente",
     EM_ANDAMENTO: "status-em-andamento",
     CONCLUIDO: "status-concluido",
-    CONCLUÍDO: "status-concluido", // caso venha com acento
+    CONCLUÍDO: "status-concluido", 
   };
 
   return (

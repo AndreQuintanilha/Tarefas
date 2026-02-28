@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { registerTarefa } from "../services/CadastroTarefa.api"; // 👈 importa serviço
+import { registerTarefa } from "../services/CadastroTarefa.api"; 
 import "../style/CadastroTarefas.css";
 
 export default function CadastroTarefas({ setActive, usuarioLogado }) {
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
-  const [status, setStatus] = useState("aberto");
-  const [responsavel, setResponsavel] = useState(usuarioLogado.username); // 👈 já pega do login
+  const [status, setStatus] = useState("ABERTO");
+  const [responsavel, setResponsavel] = useState(usuarioLogado.username); //já pega do login
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ export default function CadastroTarefas({ setActive, usuarioLogado }) {
       titulo,
       descricao,
       status,
-      usuario: { username: responsavel }, // 👈 formato correto
+      usuario: { username: responsavel },
     };
 
     try {
