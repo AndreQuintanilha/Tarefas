@@ -1,0 +1,123 @@
+/* Container centralizado na tela */
+.perfil-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  min-height: 80vh;
+  background: #f7f7f7;
+  box-sizing: border-box;
+  margin: 40px auto;    
+}
+
+/* Card principal */
+.perfil-card {
+  width: 100%;
+  max-width: 700px; /* maior que antes */
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+
+}
+
+/* Título do card */
+.perfil-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 3rem;
+  color: black;
+  margin: 10px;
+  margin: 20px 0 30px ;
+}
+
+/* Informações de perfil no modo visualização */
+.perfil-info p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* Formulário de edição */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Botões */
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+
+}
+
+.btn-primary {
+  flex: 1;
+  padding: 12px;
+  background-color: #2d89ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  
+  
+}
+
+.btn-primary:hover {
+  background-color: #1a6fd3;
+  align-items: center;
+}
+
+.btn-danger {
+  flex: 1;
+  padding: 12px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: #b52a3c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .perfil-card {
+    padding: 25px 20px;
+  }
+
+  .perfil-title {
+    font-size: 1.7rem;
+  }
+
+  .form-group input {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+}

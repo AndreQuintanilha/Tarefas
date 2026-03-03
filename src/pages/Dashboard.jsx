@@ -20,7 +20,7 @@ export default function Dashboard({ usuarioLogado }) {
   const [tarefas, setTarefas] = useState([]);
   const [funcionarios, setFuncionarios] = useState([]);
 
-  // ================= CARREGAR DADOS =================
+  
   useEffect(() => {
     const carregar = async () => {
       try {
@@ -45,7 +45,7 @@ export default function Dashboard({ usuarioLogado }) {
     if (usuarioLogado) carregar();
   }, [usuarioLogado]);
 
-  // ================= AGRUPAR STATUS =================
+  
   const statusCount = tarefas.reduce((acc, t) => {
     const status = t.status?.toUpperCase() || "DESCONHECIDO";
     acc[status] = (acc[status] || 0) + 1;
@@ -64,7 +64,6 @@ export default function Dashboard({ usuarioLogado }) {
 
   const COLORS = ["#0088FE", "#FFBB28", "#13bd4c", "#ff4444"];
 
-  // ================= % DENTRO DA PIZZA =================
   const renderPercentLabel = ({
     cx,
     cy,
@@ -73,7 +72,7 @@ export default function Dashboard({ usuarioLogado }) {
     outerRadius,
     percent,
   }) => {
-    // evita porcentagem muito pequena
+    
     if (percent < 0.05) return null;
 
     const RADIAN = Math.PI / 180;

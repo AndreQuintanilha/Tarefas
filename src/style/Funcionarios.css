@@ -15,7 +15,7 @@ body {
 
 .funcionarios-header {
   display: flex;
-  justify-content: space-between; /* título à esquerda, botão à direita */
+  justify-content: space-between; 
   align-items: center;
   margin-bottom: 20px;
 }
@@ -41,28 +41,28 @@ body {
   background-color: #357ab8;
 }
 
-/* Grid responsivo estilo Bootstrap */
+
 .funcionarios-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
-  justify-items: center; /* centraliza os cards */
+  justify-items: center; 
 }
 
-/* Card maior */
+
 .funcionario-card {
   background: #fff;
   border-radius: 12px;
   padding: 50px 70px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   width: 100%;
-  max-width: 350px; /* largura máxima de cada card */
+  max-width: 350px; 
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Informações */
+
 .card-info h3 {
   margin: 0 0 10px;
   font-size: 22px;
@@ -75,10 +75,10 @@ body {
   color: #555;
 }
 
-/* Botões separados das informações */
+
 .card-actions {
   display: flex;
-  justify-content: center; /* centraliza os botões */
+  justify-content: center; 
   gap: 20px;
 }
 
@@ -109,10 +109,10 @@ body {
   background-color: #c9302c;
 }
 
-/* Responsivo */
+
 @media (min-width: 1200px) {
   .funcionarios-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas grandes */
+    grid-template-columns: repeat(4, 1fr); 
   }
 }
 

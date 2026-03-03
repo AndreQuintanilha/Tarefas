@@ -41,29 +41,29 @@ body {
   background-color: #357ab8;
 }
 
-/* Grid responsivo estilo Bootstrap */
+
 .tarefas-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
-  justify-items: center; /* centraliza os cards */
+  justify-items: center; 
 }
 
-/* Card maior */
+
 .tarefa-card {
   background: #fff;
   border-radius: 12px;
   padding: 50px 70px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   width: 100%;
-  max-width: 350px; /* largura máxima de cada card */
+  max-width: 350px; 
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: background-color 0.3s ease; /* transição suave para cor */
+  transition: background-color 0.3s ease; 
 }
 
-/* Informações */
+
 .card-info h3 {
   margin: 0 0 10px;
   font-size: 22px;
@@ -76,10 +76,10 @@ body {
   color: #555;
 }
 
-/* Botões separados das informações */
+
 .card-actions {
   display: flex;
-  justify-content: center; /* centraliza os botões */
+  justify-content: center; 
   gap: 20px;
 }
 
@@ -111,7 +111,7 @@ body {
   background-color: #c9302c;
 }
 
-/* Status específicos para cor do card */
+
 .tarefa-card.status-aberto {
   background-color: #ffffff; 
 }
@@ -128,10 +128,10 @@ body {
   background-color: #4af171; 
 }
 
-/* Responsivo */
+
 @media (min-width: 1200px) {
   .tarefas-grid {
-    grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas grandes */
+    grid-template-columns: repeat(4, 1fr); 
   }
 }
 

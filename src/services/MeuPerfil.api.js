@@ -2,12 +2,12 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/usuarios";
 
-export const getFuncionarioById = async (id) => {
+export const buscarUsuarioPorId = async (id) => {
   const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };
 
-export const updateFuncionario = async (id, funcionario) => {
-  const response = await axios.put(`${API_URL}/${id}`, funcionario);
+export const atualizarUsuario = async (id, dados) => {
+  const response = await axios.put(`${API_URL}/${id}`, dados);
   return response.data;
 };

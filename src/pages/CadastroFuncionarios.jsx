@@ -16,14 +16,14 @@ export default function CadastroFuncionarios({ setActive }) {
       email,
       username,
       senha,
-      // perfil não precisa ser escolhido, já vem fixo no service
+      
     };
 
     try {
       await registerFuncionario(novoFuncionario);
       alert("Funcionário cadastrado com sucesso!");
 
-      // limpar formulário
+      
       setNome("");
       setEmail("");
       setUsername("");

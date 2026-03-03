@@ -3,13 +3,13 @@ import { NavbarSimple } from "./components/NavbarSimple";
 import Login from "./pages/Login";
 import classes from "./App.module.css";
 
-// pages
+import MeuPerfil from "./pages/MeuPerfil";
 import Dashboard from "./pages/Dashboard";
 import Funcionarios from "./pages/Funcionarios";
 import CadastroTarefas from "./pages/CadastroTarefas";
 import CadastroFuncionarios from "./pages/CadastroFuncionarios";
 import AlterarFuncionarios from "./pages/AlterarFuncionarios";
-import Relatorio from "./pages/Relatorio"; // 👈 agora está consistente
+import Relatorio from "./pages/Relatorio"; 
 import Tarefas from "./pages/Tarefas";
 import AlterarTarefas from "./pages/AlterarTarefas";
 
@@ -20,9 +20,9 @@ export default function App() {
   const [selectedFuncionarioId, setSelectedFuncionarioId] = useState(null);
   const [selectedTarefaId, setSelectedTarefaId] = useState(null);
 
-  // permissões por perfil
+
   const permissions = {
-    FUNCIONARIO: ["Dashboard", "Tarefas"],
+    FUNCIONARIO: ["Dashboard", "Tarefas", "MeuPerfil"],
     GESTOR: [
       "Dashboard",
       "Tarefas",
@@ -31,7 +31,8 @@ export default function App() {
       "CadastroTarefas",
       "CadastroFuncionarios",
       "AlterarFuncionarios",
-      "AlterarTarefas"
+      "AlterarTarefas",
+      "MeuPerfil",
     ],
   };
 
@@ -42,6 +43,13 @@ export default function App() {
   const hasAccess = permissions[user.role].includes(active);
 
   const contentMap = {
+
+    MeuPerfil: (
+  <MeuPerfil
+    usuarioLogado={user}   
+  />
+),
+
   Dashboard: (
     <Dashboard
       usuarioLogado={{

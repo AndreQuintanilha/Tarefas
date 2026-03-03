@@ -1,34 +1,48 @@
 import { useState } from "react";
 import "../style/login.css";
 import { login } from "../services/login.api";
+import { Loader, Center } from "@mantine/core";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const result = await login(username, password); 
-      // Exemplo: "Login realizado com sucesso! Perfil: GESTOR"
+      // apenas para simular delay visual
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      if (result.startsWith("Login realizado")) {
-        // Extrai o perfil da resposta
-        const perfil = result.split("Perfil: ")[1].trim();
+      const result = await login(username, password);
 
-        // Passa o usuário com o perfil correto para o App.jsx
-        onLogin({ username: username, role: perfil });
+      // 🔥 Agora o backend já retorna o usuário completo
+      onLogin({
+        id: result.id,
+        username: result.username,
+        role: result.perfil
+      });
 
-      } else {
-        setError("Usuário ou senha inválidos");
-      }
     } catch (err) {
       console.error(err);
-      setError("Erro ao conectar com servidor");
+      setError("Usuário ou senha inválidos");
+    } finally {
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <Center style={{ height: "100vh", flexDirection: "column" }}>
+        <Loader size="lg" />
+        <p>Entrando no sistema...</p>
+      </Center>
+    );
+  }
 
   return (
     <div className="login-container">
@@ -59,8 +73,6 @@ export default function Login({ onLogin }) {
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-      
     </div>
   );
 }

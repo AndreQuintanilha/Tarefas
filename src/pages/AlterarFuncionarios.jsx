@@ -8,7 +8,7 @@ export default function AlterarFuncionarios({ setActive, funcionarioId }) {
   const [username, setUsername] = useState("");
   const [senha, setSenha] = useState("");
 
-  // Carregar dados do funcionário ao abrir a página
+
   useEffect(() => {
     const carregarFuncionario = async () => {
       try {
@@ -16,7 +16,7 @@ export default function AlterarFuncionarios({ setActive, funcionarioId }) {
         setNome(f.nome);
         setEmail(f.email);
         setUsername(f.username);
-        setSenha(f.senha || ""); // se o backend não retorna senha, deixa vazio
+        setSenha(f.senha || ""); 
       } catch (error) {
         console.error("Erro ao carregar funcionário:", error);
       }
@@ -35,7 +35,7 @@ export default function AlterarFuncionarios({ setActive, funcionarioId }) {
       email,
       username,
       senha,
-      perfil: "FUNCIONARIO", // mantém perfil FUNCIONARIO
+      perfil: "FUNCIONARIO", 
     };
 
     try {
@@ -98,3 +98,4 @@ export default function AlterarFuncionarios({ setActive, funcionarioId }) {
     </div>
   );
 }
+

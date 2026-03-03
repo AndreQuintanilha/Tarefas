@@ -59,7 +59,7 @@ export default function Tarefas({
     setActive("CadastroTarefas");
   };
 
-  // Mapeamento de status para classes CSS
+  
   const statusClassMap = {
     ABERTO: "status-aberto",
     PENDENTE: "status-pendente",

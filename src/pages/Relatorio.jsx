@@ -41,14 +41,12 @@ export default function Relatorio({ usuarioLogado }) {
   setResultado({ filtradas, contagem });
 };
 
-
-  // Mapeamento de status para classes CSS
   const statusClassMap = {
     ABERTO: "status-aberto",
     PENDENTE: "status-pendente",
     EM_ANDAMENTO: "status-em-andamento",
     CONCLUIDO: "status-concluido",
-    CONCLUÍDO: "status-concluido", // caso venha com acento
+    CONCLUÍDO: "status-concluido", 
   };
 
   return (

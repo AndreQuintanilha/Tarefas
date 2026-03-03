@@ -22,12 +22,12 @@ export default function CadastroTarefas({ setActive, usuarioLogado }) {
       await registerTarefa(novaTarefa);
       alert("Tarefa cadastrada com sucesso!");
 
-      // limpar campos
+      
       setTitulo("");
       setDescricao("");
-      setStatus("aberto");
+      setStatus("ABERTO");
 
-      setActive("Tarefas"); // volta para lista
+      setActive("Tarefas"); 
     } catch (error) {
       console.error("Erro ao cadastrar tarefa:", error);
       alert("Erro ao cadastrar tarefa");

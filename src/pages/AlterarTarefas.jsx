@@ -1,4 +1,4 @@
-// src/pages/AlterarTarefas.jsx
+
 import { useEffect, useState } from "react";
 import { updateTarefa, getTarefasPorUsuario, getTarefas } from "../services/tarefa.api";
 import "../style/AlterarTarefas.css";

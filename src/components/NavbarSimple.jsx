@@ -10,12 +10,13 @@ import {
 import { Group, Code } from "@mantine/core";
 import classes from "./NavbarSimple.module.css";
 
-// 🔹 TODOS OS MENUS DO SISTEMA
+
 const data = [
   { label: "Dashboard", icon: IconHome },
   { label: "Funcionários", icon: IconUser },
   { label: "Tarefas", icon: IconChecklist },
   { label: "Relatório", icon: IconReport },
+  { label: "MeuPerfil", icon: IconUser },
 ];
 
 export function NavbarSimple({
@@ -48,7 +49,7 @@ export function NavbarSimple({
         {/* ===== LINKS DO MENU ===== */}
         <div className={classes.linksMobile}>
           {data
-            //  MOSTRA APENAS O QUE O PERFIL PODE VER
+           
             .filter((item) => permissions.includes(item.label))
             .map((item) => {
               const IconComponent = item.icon;
@@ -62,7 +63,7 @@ export function NavbarSimple({
                   onClick={(e) => {
                     e.preventDefault();
                     setActive(item.label);
-                    setOpen(false); // fecha no mobile
+                    setOpen(false); 
                   }}
                 >
                   <IconComponent
@@ -83,10 +84,9 @@ export function NavbarSimple({
     onClick={(e) => {
       e.preventDefault();
 
-      // Pergunta ao usuário se ele quer realmente sair
       const confirmar = window.confirm("Você realmente deseja sair?");
       if (confirmar) {
-        onLogout(); // volta para tela de login
+        onLogout(); 
       }
     }}
   >

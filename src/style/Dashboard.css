@@ -6,13 +6,13 @@
   margin: 0;
 }
 
-/* TITULO */
+
 .dashboard-title {
   margin-bottom: 30px;
   color: #333;
 }
 
-/* CARD */
+
 .dashboard-card {
   
   background: white;
@@ -40,7 +40,7 @@
   font-weight: bold;
 }
 
-/* GRAFICO */
+
 .chart-container {
   background: white;
   padding: 50px;
