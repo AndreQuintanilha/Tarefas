@@ -26,6 +26,12 @@ public class UsuarioController {
         return usuarioRepository.findById(id).orElse(null);
     }
 
+    // 🔥 NOVO ENDPOINT - Buscar por username
+    @GetMapping("/username/{username}")
+    public Usuario buscarPorUsername(@PathVariable String username) {
+        return usuarioRepository.findByUsername(username).orElse(null);
+    }
+
     // Atualizar usuário
     @PutMapping("/{id}")
     public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuarioAtualizado) {

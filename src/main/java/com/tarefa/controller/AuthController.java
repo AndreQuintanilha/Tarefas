@@ -18,13 +18,19 @@ public class AuthController {
 
     // Endpoint de login
     @PostMapping("/login")
-    public String login(@RequestBody Usuario usuario) {
+    public Usuario login(@RequestBody Usuario usuario) {
+
         Optional<Usuario> user = usuarioRepository.findByUsername(usuario.getUsername());
 
         if (user.isPresent() && user.get().getSenha().equals(usuario.getSenha())) {
-            return "Login realizado com sucesso! Perfil: " + user.get().getPerfil();
+
+            // opcional: evitar devolver a senha
+            user.get().setSenha(null);
+
+            return user.get();
+
         } else {
-            return "Usuário ou senha inválidos!";
+            throw new RuntimeException("Usuário ou senha inválidos!");
         }
     }
 
